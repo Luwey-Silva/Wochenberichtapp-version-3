@@ -26,7 +26,7 @@ This is all for now.
       - transfer obect to pass along
     - go to main page
  
- - figure out db
+ - figure out db model we want to aim for
    - ????
  
  - figure out "tables" window
