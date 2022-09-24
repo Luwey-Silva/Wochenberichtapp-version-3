@@ -10,9 +10,28 @@
 --------------------------------------------------------------------
 
 Things to fix:
-"tables" window is invisible when using 1 screen
 Just the Fields User_stunden and User_beschreibung may be empty.
 
 ----------------------------------------------------------------------
 
 This is all for now.
+
+
+### todo:
+    
+ - login window
+    - make first login window
+        - input + labels
+    - remember the values given
+      - transfer obect to pass along
+    - go to main page
+ 
+ - figure out db
+   - ????
+ 
+ - figure out "tables" window
+   - too big
+   - but a lot of values
+   - Just the Fields User_stunden and User_beschreibung may be empty
+### long term maybe
+ - connect/save to real db(?mysql in xamp?)

@@ -25,7 +25,7 @@ def create():
     ]
 
     contact_information_window = sg.Window("Contact Information Window", 
-    contact_information_window_layout, modal=True,size=(1000,200))
+    contact_information_window_layout, modal=True, size=(1000, 200))
 
     while True:
         event, values = contact_information_window.read()
