@@ -20,5 +20,3 @@ def create_table():
                 USER_BESCHREIBUNG_FREITAG       TEXT    NOT NULL);''')
     conn.execute(query)
     conn.close()
-
-create_table()

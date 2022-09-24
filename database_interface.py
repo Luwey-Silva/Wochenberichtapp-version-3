@@ -1,5 +1,4 @@
 import sqlite3
-import valueTransfer as ValueTransfer
 
 
 
@@ -7,7 +6,7 @@ def get_connection():
     return sqlite3.connect('contact_information.db')
 
 
-def insert_contact(valueTransfer:ValueTransfer):
+def insert_contact(valueTransfer):
     conn = get_connection()
     conn.execute(
                 "INSERT INTO CONTACT_INFORMATION "

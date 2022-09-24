@@ -3,6 +3,8 @@ import contact_information_window
 import database_interface
 import validation
 import valueTransfer
+import create_table
+import pathlib
 
 layout = [[sg.Text('Bitte gebe den Folgende :', font=("Helvetica", 15))],
           [sg.Text("Dein Name:", font=("Helvetica", 15)), sg.Input(key="-NAME-")],
@@ -21,6 +23,8 @@ layout = [[sg.Text('Bitte gebe den Folgende :', font=("Helvetica", 15))],
           [sg.Text("Gib die Stunden für Freitag ein:", font=("Helvetica", 15)), sg.Input(key="-USER_STUNDEN_FREITAG-")],
           [sg.Text("Was würde am Freitag gemacht?", font=("Helvetica", 15)), sg.Multiline(key="-USER_BESCHREIBUNG_FREITAG-", size=(50, 3))],
           [sg.Button('Submit Contact Information', font=("Helvetica", 15)), sg.Button('Show Table', font=("Helvetica", 15)), sg.Exit(font=("Helvetica", 15))]]
+
+
 
 
 def fill_valueTransfer(input_values):
@@ -43,6 +47,12 @@ def fill_valueTransfer(input_values):
         .set_user_beschreibung_freitag(input_values['-USER_BESCHREIBUNG_FREITAG-'])
     return tempValueTransferInstance
 
+
+file = pathlib.Path("contact_information.db")
+if file.exists():
+    pass
+else:
+    create_table.create_table()
 
 window = sg.Window("Submit Contact Information", layout, element_justification="right", finalize=True)
 
