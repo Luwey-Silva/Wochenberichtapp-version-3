@@ -2,8 +2,13 @@ import sqlite3
 import valueTransfer as ValueTransfer
 
 
+
+def get_connection():
+    return sqlite3.connect('contact_information.db')
+
+
 def insert_contact(valueTransfer:ValueTransfer):
-    conn = sqlite3.connect('contact_information.db')
+    conn = get_connection()
     conn.execute(
                 "INSERT INTO CONTACT_INFORMATION "
                     "(NAME,"
@@ -43,18 +48,18 @@ def insert_contact(valueTransfer:ValueTransfer):
     conn.close()
 
 def delete_contact_by_name(name):
-    conn = sqlite3.connect('contact_information.db')
+    conn = get_connection()
     conn.execute("DELETE from CONTACT_INFORMATION where name = ?",(name,))
     conn.close()
 
 def edit_address_by_name(name, address):
-    conn = sqlite3.connect('contact_information.db')
+    conn = get_connection()
     conn.execute("UPDATE CONTACT_INFORMATION set ADDRESS = ? where NAME = ?", (name, address))
     conn.commit()
     conn.close()
 
 def edit_phone_number_by_name(name, phone_number):
-    conn = sqlite3.connect('contact_information.db')
+    conn = get_connection()
     conn.execute("UPDATE CONTACT_INFORMATION set ADDRESS = ? where NAME = ?", (name, phone_number))
     conn.close()
 
@@ -63,9 +68,9 @@ def retrieve_contacts():
 
     query = "SELECT " \
                 "name, " \
+                "nachname, " \
                 "von, " \
                 "bis, " \
-                "nachname, " \
                 "kw, " \
                 "user_stunden_montag, " \
                 "user_beschreibung_montag, user_stunden_dienstag, " \
@@ -76,7 +81,7 @@ def retrieve_contacts():
             "from " \
                 "CONTACT_INFORMATION"
 
-    conn = sqlite3.connect('contact_information.db')
+    conn = get_connection()
     cursor = conn.execute(query)
     # Contact records are tuples and need to be converted into an array
     for row in cursor:

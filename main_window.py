@@ -4,12 +4,11 @@ import database_interface
 import validation
 import valueTransfer
 
-
 layout = [[sg.Text('Bitte gebe den Folgende :', font=("Helvetica", 15))],
           [sg.Text("Dein Name:", font=("Helvetica", 15)), sg.Input(key="-NAME-")],
+          [sg.Text("Dein Nachname:", font=("Helvetica", 15)), sg.Input(key="-NACHNAME-")],
           [sg.Text('Von', font=("Helvetica", 15)), sg.InputText(key='-VON-')],
           [sg.Text('Bis', font=("Helvetica", 15)), sg.InputText(key='-BIS-')],
-          [sg.Text("Dein Nachname:", font=("Helvetica", 15)), sg.Input(key="-NACHNAME-")],
           [sg.Text("Kalenderwoche:", font=("Helvetica", 15)), sg.Input(key="-KW-")],
           [sg.Text("Gib die Stunden für Montag ein:", font=("Helvetica", 15)), sg.Input(key="-USER_STUNDEN_MONTAG-")],
           [sg.Text("Was würde am Montag gemacht?", font=("Helvetica", 15)), sg.Multiline(key="-USER_BESCHREIBUNG_MONTAG-", size=(50, 3))],    
@@ -23,25 +22,27 @@ layout = [[sg.Text('Bitte gebe den Folgende :', font=("Helvetica", 15))],
           [sg.Text("Was würde am Freitag gemacht?", font=("Helvetica", 15)), sg.Multiline(key="-USER_BESCHREIBUNG_FREITAG-", size=(50, 3))],
           [sg.Button('Submit Contact Information', font=("Helvetica", 15)), sg.Button('Show Table', font=("Helvetica", 15)), sg.Exit(font=("Helvetica", 15))]]
 
-def fill_valueTransfer(values):
+
+def fill_valueTransfer(input_values):
     tempValueTransferInstance = valueTransfer.ValueTransfer()
     tempValueTransferInstance \
-        .set_name(values['-NAME-']) \
-        .set_nachname(values['-NACHNAME-']) \
-        .set_von(values['-VON-']) \
-        .set_bis(values['-BIS-']) \
-        .set_kw(values['-KW-']) \
-        .set_user_stunden_montag(values['-USER_STUNDEN_MONTAG-']) \
-        .set_user_beschreibung_montag(values['-USER_BESCHREIBUNG_MONTAG-']) \
-        .set_user_stunden_dienstag(values['-USER_STUNDEN_DIENSTAG-']) \
-        .set_user_beschreibung_dienstag(values['-USER_BESCHREIBUNG_DIENSTAG-']) \
-        .set_user_stunden_mittwoch(values['-USER_STUNDEN_MITTWOCH-']) \
-        .set_user_beschreibung_mittwoch(values['-USER_BESCHREIBUNG_MITTWOCH-']) \
-        .set_user_stunden_donnerstag(values['-USER_STUNDEN_DONNERSTAG-']) \
-        .set_user_beschreibung_donnerstag(values['-USER_BESCHREIBUNG_DONNERSTAG-']) \
-        .set_user_stunden_freitag(values['-USER_STUNDEN_FREITAG-']) \
-        .set_user_beschreibung_freitag(values['-USER_BESCHREIBUNG_FREITAG-'])
+        .set_name(input_values['-NAME-']) \
+        .set_nachname(input_values['-NACHNAME-']) \
+        .set_von(input_values['-VON-']) \
+        .set_bis(input_values['-BIS-']) \
+        .set_kw(input_values['-KW-']) \
+        .set_user_stunden_montag(input_values['-USER_STUNDEN_MONTAG-']) \
+        .set_user_beschreibung_montag(input_values['-USER_BESCHREIBUNG_MONTAG-']) \
+        .set_user_stunden_dienstag(input_values['-USER_STUNDEN_DIENSTAG-']) \
+        .set_user_beschreibung_dienstag(input_values['-USER_BESCHREIBUNG_DIENSTAG-']) \
+        .set_user_stunden_mittwoch(input_values['-USER_STUNDEN_MITTWOCH-']) \
+        .set_user_beschreibung_mittwoch(input_values['-USER_BESCHREIBUNG_MITTWOCH-']) \
+        .set_user_stunden_donnerstag(input_values['-USER_STUNDEN_DONNERSTAG-']) \
+        .set_user_beschreibung_donnerstag(input_values['-USER_BESCHREIBUNG_DONNERSTAG-']) \
+        .set_user_stunden_freitag(input_values['-USER_STUNDEN_FREITAG-']) \
+        .set_user_beschreibung_freitag(input_values['-USER_BESCHREIBUNG_FREITAG-'])
     return tempValueTransferInstance
+
 
 window = sg.Window("Submit Contact Information", layout, element_justification="right", finalize=True)
 
