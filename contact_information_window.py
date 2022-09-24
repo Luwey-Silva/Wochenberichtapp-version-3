@@ -13,10 +13,11 @@ def create():
     headings = ['Name', 'Von', 'Bis', 'Nachname', 'Kw', 'User_stunden_montag', 'User_beschreibung_montag', 'User_stunden_dienstag', 'User_beschreibung_dienstag', 'User_stunden_mittwoch', 'User_beschreibung_mittwoch', 'User_stunden_donnerstag', 'User_beschreibung_donnerstag', 'User_stunden_freitag', 'User_beschreibung_freitag']
 
     contact_information_window_layout = [
-        [sg.Table(values=contact_records_array, headings=headings, max_col_width=35,
+        [sg.Table(values=contact_records_array, headings=headings,
+                    max_col_width=35,
                     auto_size_columns=True,
                     display_row_numbers=True,
-                    justification='right',
+                    justification='left',
                     num_rows=10,
                     key='-TABLE-',
                     row_height=35,
@@ -24,7 +25,7 @@ def create():
     ]
 
     contact_information_window = sg.Window("Contact Information Window", 
-    contact_information_window_layout, modal=True)
+    contact_information_window_layout, modal=True,size=(1000,200))
 
     while True:
         event, values = contact_information_window.read()
