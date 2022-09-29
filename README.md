@@ -8,6 +8,12 @@
 			but morning is prefered
 
 
+
+### coding standard:
+    we use the python standard
+    file names start capitilized and are ?prob snake case?
+    
+
 #1. First run all other .py files before run main_window.py
 1. run **main_window.py**
 
