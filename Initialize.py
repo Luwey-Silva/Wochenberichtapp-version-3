@@ -1,8 +1,10 @@
 import sqlite3
+import pathlib
+
 
 def create_table():
     conn = sqlite3.connect('contact_information.db')
-    query = (''' CREATE TABLE CONTACT_INFORMATION
+    query = ('''CREATE TABLE CONTACT_INFORMATION
                 (NAME	                        TEXT    NOT NULL,
                 VON    		                    INT,
                 BIS		                        INT,
@@ -20,3 +22,11 @@ def create_table():
                 USER_BESCHREIBUNG_FREITAG       TEXT    NOT NULL);''')
     conn.execute(query)
     conn.close()
+
+
+def create_db_if_not_exist():
+    file = pathlib.Path("contact_information.db")
+    if file.exists():
+        pass
+    else:
+        create_table()

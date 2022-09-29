@@ -1,12 +1,11 @@
 import sqlite3
 
 
-
 def get_connection():
     return sqlite3.connect('contact_information.db')
 
 
-def insert_contact(valueTransfer):
+def insert_contact(value_transfer):
     conn = get_connection()
     conn.execute(
                 "INSERT INTO CONTACT_INFORMATION "
@@ -27,29 +26,31 @@ def insert_contact(valueTransfer):
                      "USER_BESCHREIBUNG_FREITAG) "
                  "VALUES "
                     "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-                 (valueTransfer.get_name(),
-                  valueTransfer.get_von(),
-                  valueTransfer.get_bis(),
-                  valueTransfer.get_nachname(),
-                  valueTransfer.get_kw(),
-                  valueTransfer.get_user_stunden_montag(),
-                  valueTransfer.get_user_beschreibung_montag(),
-                  valueTransfer.get_user_stunden_dienstag(),
-                  valueTransfer.get_user_beschreibung_dienstag(),
-                  valueTransfer.get_user_stunden_mittwoch(),
-                  valueTransfer.get_user_beschreibung_mittwoch(),
-                  valueTransfer.get_user_stunden_donnerstag(),
-                  valueTransfer.get_user_beschreibung_donnerstag(),
-                  valueTransfer.get_user_stunden_freitag(),
-                  valueTransfer.get_user_beschreibung_freitag())
+                 (value_transfer.get_name(),
+                  value_transfer.get_von(),
+                  value_transfer.get_bis(),
+                  value_transfer.get_nachname(),
+                  value_transfer.get_kw(),
+                  value_transfer.get_user_stunden_montag(),
+                  value_transfer.get_user_beschreibung_montag(),
+                  value_transfer.get_user_stunden_dienstag(),
+                  value_transfer.get_user_beschreibung_dienstag(),
+                  value_transfer.get_user_stunden_mittwoch(),
+                  value_transfer.get_user_beschreibung_mittwoch(),
+                  value_transfer.get_user_stunden_donnerstag(),
+                  value_transfer.get_user_beschreibung_donnerstag(),
+                  value_transfer.get_user_stunden_freitag(),
+                  value_transfer.get_user_beschreibung_freitag())
                 )
     conn.commit()
     conn.close()
+
 
 def delete_contact_by_name(name):
     conn = get_connection()
     conn.execute("DELETE from CONTACT_INFORMATION where name = ?",(name,))
     conn.close()
+
 
 def edit_address_by_name(name, address):
     conn = get_connection()
@@ -57,10 +58,12 @@ def edit_address_by_name(name, address):
     conn.commit()
     conn.close()
 
+
 def edit_phone_number_by_name(name, phone_number):
     conn = get_connection()
     conn.execute("UPDATE CONTACT_INFORMATION set ADDRESS = ? where NAME = ?", (name, phone_number))
     conn.close()
+
 
 def retrieve_contacts():
     results = []

@@ -1,5 +1,11 @@
 # Wochenberichtapp version 3
 
+#meetup (meeeetüüüp)
+	donnerstag(after school)(OL for homeowrk)(after for project and project HW)
+	weekend satmsag/sonntag(?irl? discord if not)
+		saturday is good
+			""technically"" all day
+			but morning is prefered
 
 
 #1. First run all other .py files before run main_window.py
@@ -23,15 +29,50 @@ This is all for now.
     - make first login window
         - input + labels
     - remember the values given
-      - transfer obect to pass along
+      
     - go to main page
- 
- - figure out db model we want to aim for
-   - ????
- 
- - figure out "tables" window
-   - too big
-   - but a lot of values
-   - Just the Fields User_stunden and User_beschreibung may be empty
-### long term maybe
- - connect/save to real db(?mysql in xamp?)
+    
+ - use real db
+
+ - Just the Fields User_stunden and User_beschreibung may be empty
+
+
+
+### plans
+   - renfoce code base
+     - find a convention and apply it
+     - use local db
+   - use flask to make a frontend
+     - make FE
+     - structure project to fit the BE/FR acthitecure
+     - 
+   
+    buid a very robus application(it should take medium-hard effor to break)
+       tests
+
+    make impressive website
+       frontend
+       resistant to load
+       fast(max 1/5s)
+       chalnges:
+       solid code
+
+	make it run on server
+		maintaining server
+		have db on server
+		make databse secure
+		"just make it work bro"
+		how to download file?
+	
+	
+	2 routes:
+		make it local host with xampp db
+		and create filled file (?exel?, word, pdf)
+		
+		make it run on server and have luwey deal with the shitstorm
+			dokcerise it(doker or ???kuberneits???)
+				docker + scripts
+                server side anoyences
+    
+    
+			

@@ -1,10 +1,8 @@
 import PySimpleGUI as sg
-import contact_information_window
-import database_interface
-import validation
-import valueTransfer
-import create_table
-import pathlib
+import Contact_information_window
+import Database_interface
+import Validation
+import Value_transfer
 
 layout = [[sg.Text('Bitte gebe den Folgende :', font=("Helvetica", 15))],
           [sg.Text("Dein Name:", font=("Helvetica", 15)), sg.Input(key="-NAME-")],
@@ -13,7 +11,7 @@ layout = [[sg.Text('Bitte gebe den Folgende :', font=("Helvetica", 15))],
           [sg.Text('Bis', font=("Helvetica", 15)), sg.InputText(key='-BIS-')],
           [sg.Text("Kalenderwoche:", font=("Helvetica", 15)), sg.Input(key="-KW-")],
           [sg.Text("Gib die Stunden für Montag ein:", font=("Helvetica", 15)), sg.Input(key="-USER_STUNDEN_MONTAG-")],
-          [sg.Text("Was würde am Montag gemacht?", font=("Helvetica", 15)), sg.Multiline(key="-USER_BESCHREIBUNG_MONTAG-", size=(50, 3))],    
+          [sg.Text("Was würde am Montag gemacht?", font=("Helvetica", 15)), sg.Multiline(key="-USER_BESCHREIBUNG_MONTAG-", size=(50, 3))],
           [sg.Text("Gib die Stunden für Dienstag ein:", font=("Helvetica", 15)), sg.Input(key="-USER_STUNDEN_DIENSTAG-")],
           [sg.Text("Was würde am Dienstag gemacht?", font=("Helvetica", 15)), sg.Multiline(key="-USER_BESCHREIBUNG_DIENSTAG-", size=(50, 3))],
           [sg.Text("Gib die Stunden für Mittwoch ein:", font=("Helvetica", 15)), sg.Input(key="-USER_STUNDEN_MITTWOCH-")],
@@ -24,11 +22,8 @@ layout = [[sg.Text('Bitte gebe den Folgende :', font=("Helvetica", 15))],
           [sg.Text("Was würde am Freitag gemacht?", font=("Helvetica", 15)), sg.Multiline(key="-USER_BESCHREIBUNG_FREITAG-", size=(50, 3))],
           [sg.Button('Submit Contact Information', font=("Helvetica", 15)), sg.Button('Show Table', font=("Helvetica", 15)), sg.Exit(font=("Helvetica", 15))]]
 
-
-
-
 def fill_valueTransfer(input_values):
-    tempValueTransferInstance = valueTransfer.ValueTransfer()
+    tempValueTransferInstance = Value_transfer.ValueTransfer()
     tempValueTransferInstance \
         .set_name(input_values['-NAME-']) \
         .set_nachname(input_values['-NACHNAME-']) \
@@ -48,35 +43,26 @@ def fill_valueTransfer(input_values):
     return tempValueTransferInstance
 
 
-file = pathlib.Path("contact_information.db")
-if file.exists():
-    pass
-else:
-    create_table.create_table()
+def create():
+    window = sg.Window("Submit Contact Information", layout, element_justification="right", finalize=True)
 
-window = sg.Window("Submit Contact Information", layout, element_justification="right", finalize=True)
+    while True:
+        event, values = window.read()
+        if event in (sg.WIN_CLOSED, 'Exit'):
+            break
 
-while True:
-    event, values = window.read()
-    if event in (sg.WIN_CLOSED, 'Exit'):
-        break
+        elif event == 'Submit Contact Information':
+            validation_result = Validation.validate(values)
+            if validation_result["is_valid"]:
+                valueTransferInstance = fill_valueTransfer(values)
+                Database_interface.insert_contact(valueTransferInstance)
+                sg.popup("Contact Information submitted!")
 
-    elif event == 'Submit Contact Information':
-        validation_result = validation.validate(values)
-        if validation_result["is_valid"]:
-            valueTransferInstance = fill_valueTransfer(values)
-            database_interface.insert_contact(valueTransferInstance)
-            sg.popup("Contact Information submitted!")
+            else:
+                error_message = Validation.generate_error_message(validation_result["values_invalid"])
+                sg.popup(error_message)
 
-        else:
-            error_message = validation.generate_error_message(validation_result["values_invalid"])
-            sg.popup(error_message)
+        elif event == 'Show Table':
+            Contact_information_window.create()
 
-    elif event == 'Show Table':
-        contact_information_window.create()
-
-
-
-
-
-window.close()
+    window.close()
